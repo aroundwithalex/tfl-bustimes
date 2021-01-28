@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} View Current Bus Arrivals {% endblock %}
+{% block content %} 
+
+<h1>Current Bus Arrival Times</h1>
+
+<table class='table table-hover'>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Vehicle Registration</th>
+            <th scope="col">Departing Station</th>
+            <th scope="col">Destination</th>
+            <th scope="col">On Line</th>
+            <th scope="col">Time to Destination</th>
+            <th scope="col">Expected Arrival</th>
+            <th scope="col">Heading Towards</th>
+            <th scope="col">Direction</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in data %}
+    <tr>
+        <td></td>
+        <td>{{item['vehicleId']}}</td>
+        <td>{{item['stationName']}}</td>
+        <td>{{item['destinationName']}}</td>
+        <td>{{item['lineName']}}</td>
+        <td>{{item['timeToStation']}}</td>
+        <td>{{item['expectedArrival']}}</td>
+        <td>{{item['towards']}}</td>
+        <td>{{item['direction']}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<button class="btn btn-primary">Get Fresh Data</button>
+<button class="btn btn-primary"><a class='text-white text-decoration-none text-center' href="{{ url_for('raw_data')}}">View Raw JSON Data</a></button>
+
+{% endblock %}
