@@ -42,7 +42,7 @@ def data_for_display(dct):
     Raises:
         None
     """
-    KEYS = tuple(
+    KEYS = [
         "vehicleId",
         "stationName",
         "lineName",
@@ -51,7 +51,7 @@ def data_for_display(dct):
         "timeToStation",
         "towards",
         "expectedArrival",
-    )
+    ]
     data = {a: b for a, b in dct.items() if a in KEYS}
     data["vehicleId"] = " ".join((data["vehicleId"][:4], data["vehicleId"][4:]))
     data["expectedArrival"] = " ".join(data["expectedArrival"].split("T")).strip("Z")
