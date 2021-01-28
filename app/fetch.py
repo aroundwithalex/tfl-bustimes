@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import timedelta
 
 URL = "https://api.tfl.gov.uk/StopPoint/490009333W/arrivals"
 
@@ -21,15 +21,12 @@ def fetch_data(url=URL):
     res = requests.get(url)
     if res.ok:
         data = res.json()
-        if not data:
-            return None
-        for bus in data:
-            yield (bus)
+        return data
     else:
         raise ConnectionError("Cannot connect to API")
 
 
-def data_for_display(dct):
+def data_for_display(data):
     """
     Filters and fixes data for display in Flask
 
@@ -52,7 +49,12 @@ def data_for_display(dct):
         "towards",
         "expectedArrival",
     ]
-    data = {a: b for a, b in dct.items() if a in KEYS}
-    data["vehicleId"] = " ".join((data["vehicleId"][:4], data["vehicleId"][4:]))
-    data["expectedArrival"] = " ".join(data["expectedArrival"].split("T")).strip("Z")
-    return data
+    filtered_list = []
+    for bus in data:
+        new_bus = {a: b for a, b in bus.items() if a in KEYS}
+        new_bus["vehicleId"] = " ".join((bus["vehicleId"][:4], bus["vehicleId"][4:]))
+        new_bus["expectedArrival"] = " ".join(bus["expectedArrival"].split("T")).strip("Z")
+        new_bus["timeToStation"] = str(timedelta(seconds=bus["timeToStation"]))
+        new_bus["direction"] = bus["direction"].title()
+        filtered_list.append(new_bus)
+    return tuple(filtered_list)
