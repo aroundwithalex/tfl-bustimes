@@ -1,5 +1,5 @@
 import unittest
-from app.fetch import fetch_data, data_for_display
+from fetch import fetch_data, data_for_display
 
 
 class TestFetchMethods(unittest.TestCase):
