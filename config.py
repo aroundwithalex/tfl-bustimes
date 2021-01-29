@@ -10,6 +10,7 @@ class Config(object):
     SECRET_KEY = os.urandom(25)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URL = os.environ["DATABASE_URL"]
+    JSONIFY_PRETTYPRINT_REGULAR = True
 
 
 class ProductionConfig(Config):
