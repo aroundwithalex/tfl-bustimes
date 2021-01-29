@@ -45,3 +45,21 @@ def read_data(url=DB_URI):
         cur = conn.cursor()
         cur.execute("SELECT * FROM arrivals;")
         return cur.fetchall()
+
+
+def read_with_names(url=DB_URI):
+    with psql.connect(url) as conn:
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'arrivals'"
+        )
+        names = cur.fetchall()
+        cur.execute("SELECT * FROM arrivals")
+        data = cur.fetchall()
+        named_data = []
+        for item in data:
+            fresh_data = {
+                a: b for a, b in zip(("".join(x) for x in names), (x for x in item))
+            }
+            named_data.append(fresh_data)
+        return named_data
