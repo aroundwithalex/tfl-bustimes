@@ -1,7 +1,30 @@
 import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 class Config(object):
-    SECRET_KEY = os.environ.get("SECRET_KEY") or "really-secret-key"
-    LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
-    JSONIFY_PRETTYPRINT_REGULAR = True
+    DEBUG = False
+    TESTING = False
+    CSRF_ENABLED = True
+    SECRET_KEY = os.urandom(25)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URL = os.environ["DATABASE_URL"]
+
+
+class ProductionConfig(Config):
+    DEBUG = False
+
+
+class StagingConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
+
+
+class DevelopmentConfig(Config):
+    TESTING = True
+    DEBUG = True
+
+
+class TestingConfig(Config):
+    TESTING = True
