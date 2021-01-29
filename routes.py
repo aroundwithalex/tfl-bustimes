@@ -1,6 +1,6 @@
 from flask import render_template, jsonify
 from fetch import fetch_data, data_for_display
-from db import write_data, read_data
+from db import write_data, read_data, read_with_names
 from app import app
 
 
@@ -22,3 +22,9 @@ def raw_data():
 def history():
     data = read_data()
     return render_template("history.html", data=data)
+
+
+@app.route("/api/history", methods=["GET"])
+def get_history():
+    data = read_with_names()
+    return jsonify({"data": data})
