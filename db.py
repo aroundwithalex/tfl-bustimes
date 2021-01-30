@@ -41,6 +41,19 @@ def write_data(data, url=DB_URI):
 
 
 def read_data(url=DB_URI):
+    """
+    Reads data from remote Postgres database
+
+    Args:
+        url: URL for remote database
+    
+    Returns:
+        Tuple of rows from database 
+    
+    Raises:
+        None
+
+    """
     with psql.connect(url) as conn:
         cur = conn.cursor()
         cur.execute("SELECT * FROM arrivals;")
@@ -48,6 +61,18 @@ def read_data(url=DB_URI):
 
 
 def read_with_names(url=DB_URI):
+    """
+    Reads and returns data from remote database with column names
+
+    Args:
+        url: URL for remote database
+    
+    Returns:
+        Dictionary of data from remote database, with column names as keys
+    
+    Raises:
+        None
+    """
     with psql.connect(url) as conn:
         cur = conn.cursor()
         cur.execute(
