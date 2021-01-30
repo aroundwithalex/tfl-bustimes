@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     """
-    Sets Configuration variables for Flask app
+    Sets Configuration variables for Flask app.
 
     Configuration variables are set that are designed to be used in production.  SECRET_KEY set for security purposes, though there are no user forms.  Likewise for CSRF capabilities.
     """
