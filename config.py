@@ -13,6 +13,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = os.urandom(25)
+    SQLALCHEMY_DATABASE_URL= os.environ['DATABASE_URL']
     JSONIFY_PRETTYPRINT_REGULAR = True
 
 class StagingConfig(Config):
