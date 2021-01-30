@@ -1,6 +1,6 @@
 # Bustimes
 
-Bustimes is a Python library that retrives information from the [TFL Bus Arrivals API](https://api.tfl.gov.uk/StopPoint/490009333W/arrivals) and displays it within a Flask application.  The Flask application itself is hosted on Heroku, at this [address](https://tfl-bustimes.herokuapp.com)
+Bustimes is a Python library that retrives information from the [TFL Bus Arrivals API](https://api.tfl.gov.uk/StopPoint/490009333W/arrivals) and displays it within a Flask application.  The Flask application itself is hosted on Heroku, at this [address](https://tfl-bustimes.herokuapp.com).
 
 ## Installation
 
