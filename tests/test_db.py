@@ -3,6 +3,18 @@ import psycopg2 as psql
 
 
 def get_db_url(doc=".flaskenv"):
+    """
+    Parses .flaskenv to get database URL
+
+    Args:
+        Path to .flaskenv file
+    
+    Returns:
+        Remote databse URL
+    
+    Raises:
+        None
+    """
     with open(doc) as flaskenv:
         data = flaskenv.read()
         url = data.split("DATABASE_URL= ")[1]
@@ -11,10 +23,35 @@ def get_db_url(doc=".flaskenv"):
 
 class TestDB(unittest.TestCase):
     def test_conn(self):
+        """
+        Tests database connection
+
+        Args:
+            Self
+        
+        Returns:
+            None
+        
+        Raises:
+            None
+        """
         db_url = get_db_url()
         conn = psql.connect(db_url)
 
     def test_write(self):
+        """
+        Tests database write functionality
+
+        Args:
+            Self
+        
+        Returns:
+            None
+        
+        Raises:
+
+            None
+        """
         db_url = get_db_url()
         conn = psql.connect(db_url)
         cur = conn.cursor()
@@ -44,6 +81,18 @@ class TestDB(unittest.TestCase):
             self.fail("Database write failed")
 
     def test_read(self):
+        """
+        Tests database read functionality
+
+        Args:
+            Self
+        
+        Returns:
+            None
+        
+        Raises:
+            None
+        """
         db_url = get_db_url()
         with psql.connect(db_url) as conn:
             cur = conn.cursor()
