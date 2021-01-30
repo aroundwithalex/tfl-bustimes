@@ -98,5 +98,4 @@ class TestDB(unittest.TestCase):
             cur = conn.cursor()
             cur.execute("""SELECT * FROM arrivals;""")
             data = cur.fetchall()
-            print(data)
             self.assertIsInstance(data, list)
